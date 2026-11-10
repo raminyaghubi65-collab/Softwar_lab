@@ -93,3 +93,8 @@ The API suite has unit tests in `tests/test_api_suite.py`; run the complete suit
 - [Illustrative client report](reports/sample-client-report.md) — fictional example, not a real customer result
 
 Before every engagement, agree in writing on authorization, exact scope, test environment, price, deadline, and deliverables. Never request or accept wallet seed phrases, private keys, or production payment credentials.
+
+
+## Static portfolio website
+
+A lightweight English-language portfolio page is available in `docs/`. Preview by opening `docs/index.html`. To publish it, follow [the GitHub Pages setup guide](docs/README.md) and select `main` with the `/docs` folder. Publishing requires enabling GitHub Pages in repository settings.
