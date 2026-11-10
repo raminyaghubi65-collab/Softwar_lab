@@ -2,45 +2,40 @@
 
 ## Purpose
 
-A small, read-only HTTP smoke-check utility for authorized website and API targets. It sends bounded GET requests and records status, response time, content type, and configured expectation results.
+A read-only HTTP smoke checker for website and API targets you own or are explicitly authorized to test. It sends bounded GET requests and records status, response time, content type, and configured expectation results.
 
 ## Run
 
 From the repository root:
 
-\`\`\`bash
+```bash
 python -m qa_tools.web_api_smoke https://your-authorized-domain.example/health
-\`\`\`
+```
 
 Require JSON:
 
-\`\`\`bash
+```bash
 python -m qa_tools.web_api_smoke https://your-authorized-domain.example/api/health --expect-json
-\`\`\`
+```
 
 Require a response phrase:
 
-\`\`\`bash
+```bash
 python -m qa_tools.web_api_smoke https://your-authorized-domain.example/ --expect-text "Welcome"
-\`\`\`
+```
 
-Choose a report destination:
+Windows users can replace `python` with `py`.
 
-\`\`\`bash
-python -m qa_tools.web_api_smoke https://your-authorized-domain.example/health --report reports/client-smoke.json
-\`\`\`
-
-Windows users can replace \`python\` with \`py\`.
-
-## Safety boundaries
+## Network safety controls
 
 - GET requests only; no form submission or state-changing methods.
-- Use only targets you own or have explicit permission to test.
-- No port scanning, brute force, fuzzing, load testing, or vulnerability exploitation.
-- URLs containing embedded usernames or passwords are rejected.
-- Each response is limited to 1 MB by default; configurable library limit is capped at 5 MB.
-- Request timeout is bounded to 60 seconds.
-- Response bodies are not written to the report.
+- Only globally routable destination IP addresses are accepted. Loopback, private, link-local, multicast, reserved, and other non-global destinations are rejected.
+- DNS results are checked and the connection is pinned to the selected validated IP address; TLS certificate verification still uses the original hostname.
+- Redirects are not followed. A 3xx response is reported as received.
+- Environment HTTP proxy settings are not used by this transport.
+- URL credentials and URL fragments are rejected.
+- Timeout is capped at 60 seconds; response size is capped at 5 MB.
+- Response bodies are not written to reports.
 
 ## Report fields
 
@@ -48,4 +43,4 @@ The JSON report includes generation time, totals, URL, pass/fail, HTTP status, e
 
 ## Limitations
 
-This is a basic smoke checker, not a full API contract validator, browser automation suite, security audit, or uptime-monitoring service. Authentication, custom headers, cookies, POST requests, redirects policy, and TLS customization are intentionally outside this first version.
+This is a basic smoke checker, not a penetration tester, load tester, browser automation suite, or security audit. Authentication, custom headers, cookies, POST requests, and proxy support are intentionally not implemented. DNS resolution itself is handled by the operating system resolver and may block independently of the HTTP timeout. Test only systems within your written authorization.
