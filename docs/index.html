@@ -16,6 +16,7 @@
       <a href="#process">Process</a>
       <a href="#work">Example</a>
       <a href="#contact">Contact</a>
+      <a href="#submit-project">Submit project</a>
     </nav>
   </header>
   <main>
@@ -60,11 +61,38 @@
     <section class="section shade" id="contact"><div class="wrap">
       <p class="eyebrow">START WITH A SMALL TASK</p>
       <h2>Tell me what needs testing.</h2>
-      <p>For a first contact, open the GitHub profile and use an available public contact option. Agree on scope and a private way to exchange project details before sharing URLs, builds, screenshots or logs.</p>
-      <p class="note">Do not post private staging links, credentials, customer data, payment details, private keys or seed phrases in public GitHub issues or comments.</p>
+      <p>For a first contact, use the project form below. The upload control remains disabled until the private receiving service is deployed and connected. Do not send credentials, production customer data, private keys or seed phrases.</p>
       <a class="button" href="https://github.com/raminyaghubi65-collab">Contact via GitHub profile</a>
+      <section class="intake-panel" id="submit-project" aria-labelledby="intake-heading">
+        <h3 id="intake-heading">Submit a project for testing</h3>
+        <p class="note">One file per submission · Maximum 20 MiB · APK, AAB, ZIP, PDF, PNG, JPG, TXT, JSON or CSV</p>
+        <form id="intake-form" enctype="multipart/form-data">
+          <label for="customer-name">Your name</label>
+          <input id="customer-name" name="customer_name" type="text" minlength="2" maxlength="80" autocomplete="name" required>
+          <label for="customer-email">Email address</label>
+          <input id="customer-email" name="email" type="email" maxlength="254" autocomplete="email" required>
+          <label for="project-type">Project type</label>
+          <select id="project-type" name="project_type" required>
+            <option value="">Choose a project type</option>
+            <option value="website">Website</option>
+            <option value="android">Android app</option>
+            <option value="api">API</option>
+            <option value="python">Python</option>
+            <option value="other">Other</option>
+          </select>
+          <label for="project-description">What should we test?</label>
+          <textarea id="project-description" name="description" minlength="10" maxlength="3000" rows="5" required></textarea>
+          <label for="project-file">Project file</label>
+          <input id="project-file" name="uploaded_file" type="file" accept=".apk,.aab,.zip,.pdf,.png,.jpg,.jpeg,.txt,.json,.csv" required>
+          <label class="consent"><input name="permission_confirmed" type="checkbox" value="true" required> I own this file or have permission to share it for testing, and it contains no passwords, private keys, seed phrases or data I am not authorized to share.</label>
+          <button class="button" type="submit">Submit project securely</button>
+          <p id="intake-status" class="form-status" role="status" aria-live="polite">Secure file upload is not active yet. Please contact us first; do not email sensitive files.</p>
+        </form>
+      </section>
     </div></section>
   </main>
+  <script src="intake-config.js"></script>
+  <script src="intake.js" defer></script>
   <footer class="wrap footer"><span>Software QA Lab</span><span>Honest scope. Reproducible findings. Clear reports.</span></footer>
 </body>
 </html>
