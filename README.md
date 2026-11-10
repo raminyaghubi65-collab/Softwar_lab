@@ -83,3 +83,13 @@ py -m qa_tools.api_suite reports/api-spec.json
 ```
 
 The API suite has unit tests in `tests/test_api_suite.py`; run the complete suite with `py -m unittest discover -s tests -v`. It is not a penetration tester, load tester, or full OpenAPI validator.
+
+
+## Client-ready portfolio pack
+
+- [QA services and introductory pricing](SERVICES.md)
+- [Client intake and authorization checklist](CLIENT_INTAKE.md)
+- [Outreach message templates](OUTREACH_TEMPLATES.md)
+- [Illustrative client report](reports/sample-client-report.md) — fictional example, not a real customer result
+
+Before every engagement, agree in writing on authorization, exact scope, test environment, price, deadline, and deliverables. Never request or accept wallet seed phrases, private keys, or production payment credentials.
