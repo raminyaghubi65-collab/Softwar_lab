@@ -31,7 +31,7 @@ Send the admin token in an Authorization header:
 - `GET /api/admin/submissions/{id}/file` downloads a file.
 - `DELETE /api/admin/submissions/{id}` deletes a submission and its file.
 
-Do not put the admin token in the website, JavaScript, GitHub Pages, a public issue, or a customer-facing link. Use a private admin tool or an authenticated server-side client.
+Do not put the admin token in the website, JavaScript, GitHub Pages, a public issue, or a customer-facing link. Use the included `admin_cli.py` from a private computer. Set `INTAKE_API_URL` and `ADMIN_TOKEN` as environment variables, then run `python admin_cli.py list`, `python admin_cli.py download SUBMISSION_ID`, or `python admin_cli.py delete SUBMISSION_ID`. The delete command requires typing `DELETE`.
 
 ## Security controls and limits
 
