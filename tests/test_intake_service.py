@@ -41,7 +41,7 @@ class IntakeValidationTests(unittest.TestCase):
 
     def test_rejects_binary_disguised_as_text(self):
         with self.assertRaises(HTTPException):
-            self.module.validate_upload("notes.txt", b"hello\\x00world")
+            self.module.validate_upload("notes.txt", b"hello\x00world")
 
     def test_rejects_oversized_file(self):
         with patch.object(self.module, "MAX_FILE_BYTES", 3):
