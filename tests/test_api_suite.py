@@ -7,26 +7,9 @@ from unittest.mock import patch
 from qa_tools.api_suite import run_endpoint, write_reports
 
 
-class FakeResponse:
-    status = 200
-
-    def __init__(self, body):
-        self.body = body
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        return False
-
-    def read(self, size=-1):
-        return self.body[:size]
-
-
 class ApiSuiteTests(unittest.TestCase):
-    @patch("qa_tools.api_suite.urlopen")
+    @patch("qa_tools.api_suite.safe_get", return_value=(200, {}, b'{"status":"ok","data":{"count":3}}'))
     def test_valid_contract_passes(self, mocked):
-        mocked.return_value = FakeResponse(b'{"status":"ok","data":{"count":3}}')
         result = run_endpoint({
             "name": "health", "url": "https://example.test/health",
             "required_fields": ["status", "data.count"],
@@ -36,9 +19,8 @@ class ApiSuiteTests(unittest.TestCase):
         self.assertEqual(result.failures, [])
         mocked.assert_called_once()
 
-    @patch("qa_tools.api_suite.urlopen")
-    def test_missing_field_fails(self, mocked):
-        mocked.return_value = FakeResponse(b'{"status":"ok"}')
+    @patch("qa_tools.api_suite.safe_get", return_value=(200, {}, b'{"status":"ok"}'))
+    def test_missing_field_fails(self, _mocked):
         result = run_endpoint({
             "url": "https://example.test/api",
             "required_fields": ["data.id"],
@@ -46,20 +28,16 @@ class ApiSuiteTests(unittest.TestCase):
         self.assertFalse(result.passed)
         self.assertIn("Missing required field: data.id", result.failures)
 
-    @patch("qa_tools.api_suite.urlopen")
-    def test_wrong_status_fails(self, mocked):
-        response = FakeResponse(b'{"ok":true}')
-        response.status = 204
-        mocked.return_value = response
+    @patch("qa_tools.api_suite.safe_get", return_value=(204, {}, b'{"ok":true}'))
+    def test_wrong_status_fails(self, _mocked):
         result = run_endpoint({
             "url": "https://example.test/api", "expected_status": 200,
         })
         self.assertFalse(result.passed)
-        self.assertIsNotNone(result.status_code)
+        self.assertEqual(result.status_code, 204)
 
-    @patch("qa_tools.api_suite.urlopen")
-    def test_invalid_json_fails(self, mocked):
-        mocked.return_value = FakeResponse(b"<html>oops</html>")
+    @patch("qa_tools.api_suite.safe_get", return_value=(200, {}, b"<html>oops</html>"))
+    def test_invalid_json_fails(self, _mocked):
         result = run_endpoint({"url": "https://example.test/api"})
         self.assertFalse(result.passed)
         self.assertIn("Response is not valid UTF-8 JSON", result.failures)
@@ -68,15 +46,16 @@ class ApiSuiteTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             run_endpoint({"url": "file:///etc/passwd"})
 
-    @patch("qa_tools.api_suite.urlopen")
-    def test_response_limit_is_enforced(self, mocked):
-        mocked.return_value = FakeResponse(b"x" * 30)
+    @patch("qa_tools.api_suite.safe_get", return_value=(200, {}, b"x" * 11))
+    def test_response_limit_is_enforced(self, _mocked):
         result = run_endpoint({"url": "https://example.test/api"}, max_bytes=10)
         self.assertFalse(result.passed)
         self.assertTrue(any("safety limit" in x for x in result.failures))
 
     def test_writes_json_and_html_reports_without_body(self):
-        result = run_endpoint_result()
+        from qa_tools.api_suite import ApiResult
+        result = ApiResult("demo", "https://example.test", True, 200, 12,
+                           ["HTTP status is 200"], [])
         with tempfile.TemporaryDirectory() as folder:
             json_path = Path(folder) / "report.json"
             html_path = Path(folder) / "report.html"
@@ -85,12 +64,6 @@ class ApiSuiteTests(unittest.TestCase):
             self.assertEqual(data["passed"], 1)
             self.assertNotIn("response_body", data["results"][0])
             self.assertIn("API QA Report", html_path.read_text(encoding="utf-8"))
-
-
-def run_endpoint_result():
-    from qa_tools.api_suite import ApiResult
-    return ApiResult("demo", "https://example.test", True, 200, 12,
-                     ["HTTP status is 200"], [])
 
 
 if __name__ == "__main__":
