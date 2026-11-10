@@ -61,7 +61,7 @@ class PortfolioSiteTests(unittest.TestCase):
     def test_contact_does_not_send_private_details_to_public_issue(self):
         self.assertNotIn("/issues/new", self.html)
         self.assertIn("github.com/raminyaghubi65-collab", self.html)
-        self.assertIn("Do not post private staging links", self.html)
+        self.assertIn("Do not send credentials", self.html)
 
 
 if __name__ == "__main__":
