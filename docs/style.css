@@ -1,0 +1,15 @@
+:root{color-scheme:light;--ink:#17212b;--muted:#596775;--line:#dce3e8;--paper:#fff;--wash:#f3f6f8;--accent:#135d78}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}.wrap{width:min(1060px,calc(100% - 40px));margin-inline:auto}
+.header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;text-decoration:none;color:var(--ink)}nav{display:flex;gap:20px;flex-wrap:wrap}nav a{text-decoration:none;font-size:.94rem}
+.hero{padding:92px 0 82px}.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.13em;color:var(--accent)}
+h1{font-size:clamp(2.6rem,7vw,5rem);line-height:1.04;letter-spacing:-.045em;max-width:850px;margin:16px 0}
+h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;letter-spacing:-.025em;margin:12px 0 30px}
+h3{margin-top:0;font-size:1.2rem}.lead{max-width:720px;font-size:1.2rem;color:var(--muted)}
+.button{display:inline-block;margin-top:16px;padding:12px 19px;background:var(--accent);color:white;border-radius:7px;text-decoration:none;font-weight:700}
+.note{font-size:.88rem;color:var(--muted);margin-top:20px}.section{padding:68px 0}.shade{background:var(--wash)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--line);border-radius:10px;padding:24px;background:white}.card p{color:var(--muted)}
+.card strong{display:block;margin-top:18px;color:var(--accent)}.steps{padding-left:22px;max-width:800px}.steps li{padding:9px 0}
+.links{display:grid;gap:14px}.links a{font-weight:650}.footer{display:flex;justify-content:space-between;gap:16px;padding:28px 0;color:var(--muted);font-size:.88rem}
+@media(max-width:650px){.header{align-items:flex-start;flex-direction:column}nav{gap:14px}.hero{padding:65px 0}.cards{grid-template-columns:1fr}.section{padding:52px 0}.footer{flex-direction:column}}
