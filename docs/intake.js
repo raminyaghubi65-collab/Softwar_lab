@@ -3,11 +3,11 @@
   if (!form) return;
   const status = document.querySelector("#intake-status");
   const submit = form.querySelector('button[type="submit"]');
-  const apiBase = (window.SOFTWARE_QA_INTAKE_API || "").trim().replace(/\\/$/, "");
+  const apiBase = (window.SOFTWARE_QA_INTAKE_API || "").trim().replace(/\/$/, "");
   const fileInput = form.querySelector('input[type="file"]');
   const maxBytes = 20 * 1024 * 1024;
 
-  if (!apiBase || !/^https:\\/\\//i.test(apiBase)) {
+  if (!apiBase || !/^https:\/\//i.test(apiBase)) {
     submit.disabled = true;
     status.textContent = "Secure file upload is not active yet. Please contact us first; do not email sensitive files.";
     return;
