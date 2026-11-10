@@ -65,6 +65,7 @@ The API suite has unit tests in `tests/test_api_suite.py`; run the complete suit
 ## Client-ready portfolio pack
 
 - [QA services and introductory pricing](SERVICES.md)
+- [Client payment instructions](PAYMENT.md) — USDT on TRON (TRC-20) by prior agreement
 - [Client intake and authorization checklist](CLIENT_INTAKE.md)
 - [Outreach message templates](OUTREACH_TEMPLATES.md)
 - [QA test plan template](templates/TEST_PLAN_TEMPLATE.md)
