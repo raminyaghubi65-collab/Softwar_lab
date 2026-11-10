@@ -49,4 +49,4 @@ The client supplies a test build or public/staging URL, test account if required
 
 ## Payment and delivery
 
-Agree on scope, deadline, currency, payment method, and any platform fees in writing before starting. Never pay a client an upfront "unlock", "verification", or "withdrawal" fee. Never share wallet seed phrases or private keys.
+Agree on scope, deadline, currency, payment method, and any platform fees in writing before starting. See [client payment instructions](PAYMENT.md) for the optional USDT-on-TRON method and verification steps. Never pay a client an upfront "unlock", "verification", or "withdrawal" fee. Never share wallet seed phrases or private keys.
