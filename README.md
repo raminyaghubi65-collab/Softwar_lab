@@ -48,3 +48,19 @@ This repository is a portfolio demonstration, not evidence that an unrelated cus
 ## Contact
 
 Available for small, clearly scoped Python testing, manual QA, and reproducible bug-reporting tasks.
+
+## Web and API smoke checks
+
+A safe, read-only HTTP checker is available in `qa_tools/web_api_smoke.py`. It supports expected HTTP status, expected response text, JSON validation, bounded response sizes, and JSON result reports.
+
+```bash
+python -m qa_tools.web_api_smoke https://your-authorized-domain.example/health --expect-json
+```
+
+Run the full automated suite, including the smoke-checker's unit tests:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+See [the smoke-check guide](reports/web-api-smoke-guide.md) for usage and safety limits. Test only systems you own or are explicitly authorized to assess.
