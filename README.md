@@ -2,6 +2,10 @@
 
 A practical software-testing portfolio demonstrating Python unit testing, defect-oriented test design, reproducible bug reports, and continuous integration.
 
+## Live portfolio
+
+https://raminyaghubi65-collab.github.io/Softwar_lab/
+
 ## What this repository demonstrates
 
 - Requirement-based test cases with positive, negative, and boundary coverage
@@ -24,47 +28,21 @@ python -m unittest discover -s tests -v
 
 On Windows, use `py -m unittest discover -s tests -v` if the `python` command is not available.
 
-## Repository layout
+## QA approach and scope
 
-```text
-sample_app/
-  task_manager.py
-tests/
-  test_task_manager.py
-reports/
-  test-report.md
-.github/workflows/
-  tests.yml
-```
-
-## QA approach
-
-Each test is designed around an observable requirement. The suite avoids network access, credentials, paid services, and external dependencies. CI results are the source of truth for the latest automated run.
-
-## Scope and honesty
+Each test is designed around an observable requirement. The automated suite avoids network access, credentials, paid services, and external dependencies. CI results are the source of truth for the latest automated run.
 
 This repository is a portfolio demonstration, not evidence that an unrelated customer application has been tested. No Android device testing, penetration testing, load testing, or production-system assessment is claimed. Those require a defined target, permission, and suitable test environment.
 
-## Contact
-
-Available for small, clearly scoped Python testing, manual QA, and reproducible bug-reporting tasks.
-
 ## Web and API smoke checks
 
-A safe, read-only HTTP checker is available in `qa_tools/web_api_smoke.py`. It supports expected HTTP status, expected response text, JSON validation, bounded response sizes, and JSON result reports.
+A read-only HTTP checker is available in `qa_tools/web_api_smoke.py`. It supports expected HTTP status, expected response text, JSON validation, bounded response sizes, and JSON result reports.
 
 ```bash
 python -m qa_tools.web_api_smoke https://your-authorized-domain.example/health --expect-json
 ```
 
-Run the full automated suite, including the smoke-checker's unit tests:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
 See [the smoke-check guide](reports/web-api-smoke-guide.md) for usage and safety limits. Test only systems you own or are explicitly authorized to assess.
-
 
 ## Declarative API contract suite
 
@@ -84,7 +62,6 @@ py -m qa_tools.api_suite reports/api-spec.json
 
 The API suite has unit tests in `tests/test_api_suite.py`; run the complete suite with `py -m unittest discover -s tests -v`. It is not a penetration tester, load tester, or full OpenAPI validator.
 
-
 ## Client-ready portfolio pack
 
 - [QA services and introductory pricing](SERVICES.md)
@@ -92,9 +69,8 @@ The API suite has unit tests in `tests/test_api_suite.py`; run the complete suit
 - [Outreach message templates](OUTREACH_TEMPLATES.md)
 - [Illustrative client report](reports/sample-client-report.md) — fictional example, not a real customer result
 
-Before every engagement, agree in writing on authorization, exact scope, test environment, price, deadline, and deliverables. Never request or accept wallet seed phrases, private keys, or production payment credentials.
-
+Before every engagement, agree in writing on authorization, exact scope, test environment, price, deadline, and deliverables. Never request or accept wallet seed phrases, private keys, or production payment credentials. Do not share private project URLs, builds, logs, or customer data in public GitHub issues or comments.
 
 ## Static portfolio website
 
-A lightweight English-language portfolio page is available in `docs/`. Preview by opening `docs/index.html`. To publish it, follow [the GitHub Pages setup guide](docs/README.md) and select `main` with the `/docs` folder. Publishing requires enabling GitHub Pages in repository settings.
+The responsive English-language portfolio page is in `docs/`. GitHub Pages publishes it from the `main` branch and `/docs` folder. For first contact, the site links to the GitHub profile; agree on a private channel before exchanging client materials.
