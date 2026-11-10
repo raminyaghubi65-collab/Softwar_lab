@@ -10,10 +10,11 @@ import http.client
 import ipaddress
 import socket
 import ssl
+from urllib.parse import SplitResult
 from urllib.parse import urlsplit
 
 
-def validate_url(url: str) -> tuple[object, str, int, str]:
+def validate_url(url: str) -> tuple[SplitResult, str, int, str, str]:
     """Validate an absolute HTTP(S) URL and resolve a globally routable address."""
     if not isinstance(url, str) or any(char.isspace() for char in url):
         raise ValueError("URL must be a whitespace-free absolute HTTP(S) URL")
