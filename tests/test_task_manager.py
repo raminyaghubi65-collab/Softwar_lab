@@ -25,7 +25,7 @@ class TaskManagerTests(unittest.TestCase):
             self.manager.add_task(True, "Task")
 
     def test_add_task_rejects_blank_title(self):
-        for title in ("", "   ", "\\t\\n"):
+        for title in ("", "   ", "\t\n"):
             with self.subTest(title=repr(title)):
                 with self.assertRaises(ValueError):
                     self.manager.add_task(1, title)
