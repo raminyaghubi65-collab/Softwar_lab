@@ -31,3 +31,13 @@ h3{margin-top:0;font-size:1.2rem}
 .footer{display:flex;justify-content:space-between;gap:16px;padding:28px 0;color:var(--muted);font-size:.88rem}
 @media(max-width:650px){.header{align-items:flex-start;flex-direction:column}nav{gap:14px}.hero{padding:65px 0}.cards{grid-template-columns:1fr}.section{padding:52px 0}.footer{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.intake-panel{max-width:720px;margin-top:38px;padding:26px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.intake-panel form{display:grid;gap:10px}
+.intake-panel label{font-weight:650;margin-top:8px}
+.intake-panel input:not([type=checkbox]),.intake-panel select,.intake-panel textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:7px;background:white;color:var(--ink);font:inherit}
+.intake-panel input:focus-visible,.intake-panel select:focus-visible,.intake-panel textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.intake-panel .consent{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;font-weight:400}
+.intake-panel .consent input{margin-top:6px}
+.intake-panel button:disabled{opacity:.55;cursor:not-allowed}
+.form-status{min-height:1.5em;color:var(--muted);font-size:.92rem}
