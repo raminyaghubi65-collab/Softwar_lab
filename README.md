@@ -77,3 +77,10 @@ Before every engagement, agree in writing on authorization, exact scope, test en
 ## Static portfolio website
 
 The responsive English-language portfolio page is in `docs/`. GitHub Pages publishes it from the `main` branch and `/docs` folder. For first contact, the site links to the GitHub profile; agree on a private channel before exchanging client materials.
+
+
+## Private customer file intake
+
+The portfolio now includes a project submission form and a separate FastAPI upload service in \`intake_service/\`. The service stores uploads outside the public site, restricts file types and size, and protects the admin listing/download endpoints with a bearer token. See [the deployment and security guide](intake_service/README.md).
+
+**Important:** GitHub Pages is static. The upload form remains disabled until the API is deployed to a trusted HTTPS host with persistent private storage and \`docs/intake-config.js\` is configured with that API origin. Do not ask clients to upload real or sensitive project files before deployment and operational security checks are complete.
