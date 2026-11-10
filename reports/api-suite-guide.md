@@ -26,8 +26,6 @@ Nested field paths use dot notation. Remove `max_elapsed_ms` if no response-time
 
 ## 2. Run
 
-From the repository root:
-
 ```bash
 python -m qa_tools.api_suite reports/api-spec.json
 ```
@@ -46,12 +44,17 @@ python -m qa_tools.api_suite reports/api-spec.json --json-report reports/client-
 
 Exit codes: `0` all checks passed, `1` at least one endpoint failed, `2` invalid configuration or unreadable spec.
 
-## Safety and limitations
+## Network safety and limitations
 
 - GET only; no POST/PUT/PATCH/DELETE, login automation, or state changes.
-- Only test systems for which you have permission.
-- HTTP(S) URLs only; embedded URL credentials are rejected.
+- Only globally routable destination IP addresses are accepted; private, loopback, link-local, multicast, and reserved destinations are rejected.
+- DNS is checked and the socket connects to a validated IP, avoiding a second DNS lookup for the connection. HTTPS still verifies the original hostname.
+- Redirects are not followed, preventing a public endpoint from redirecting the checker to an internal address.
+- Environment HTTP proxy settings are not used.
+- URL credentials and fragments are rejected.
 - Timeout is capped at 60 seconds and response size at 5 MB.
 - Response bodies are never included in generated reports.
-- This is contract/smoke testing, not penetration testing, load testing, or a complete OpenAPI schema validator.
-- Authentication, custom headers, cookies, pagination, and redirect restrictions are not implemented. Do not put secrets in the specification.
+- Authentication, custom headers, cookies, pagination, proxy support, and redirects are not implemented.
+- DNS resolution is performed by the operating system and may block independently of the HTTP timeout.
+
+This is contract/smoke testing, not penetration testing, load testing, or a complete OpenAPI schema validator. Never put secrets in the specification.
