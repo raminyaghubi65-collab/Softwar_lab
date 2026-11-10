@@ -149,9 +149,9 @@ def write_reports(results: list[ApiResult], json_path: Path, html_path: Path) ->
     passed = payload["passed"]
     page = """<!doctype html><html lang="en"><meta charset="utf-8">
 <title>API QA Report</title><style>
-body{font:15px system-ui;margin:2rem;color:#202124}table{border-collapse:collapse;width:100%}
-th,td{border:1px solid #ddd;padding:.65rem;text-align:left;vertical-align:top}
-th{background:#f3f4f6}.summary{margin:1rem 0}
+body{{font:15px system-ui;margin:2rem;color:#202124}}table{{border-collapse:collapse;width:100%}}
+th,td{{border:1px solid #ddd;padding:.65rem;text-align:left;vertical-align:top}}
+th{{background:#f3f4f6}}.summary{{margin:1rem 0}}
 </style><h1>API QA Report</h1><p class="summary">Generated: {generated}
 <br>Total: {total} | Passed: {passed} | Failed: {failed}</p>
 <table><thead><tr><th>Endpoint</th><th>URL</th><th>Result</th>
