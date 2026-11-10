@@ -36,7 +36,7 @@ This repository is a portfolio demonstration, not evidence that an unrelated cus
 
 ## Web and API smoke checks
 
-A read-only HTTP checker is available in `qa_tools/web_api_smoke.py`. It supports expected HTTP status, expected response text, JSON validation, bounded response sizes, and JSON result reports.
+A read-only HTTP checker is available in `qa_tools/web_api_smoke.py`. It supports expected HTTP status, expected response text, JSON validation, bounded response sizes, and JSON result reports. Both HTTP tools share `qa_tools/safe_http.py`, which rejects non-public destination IPs, pins connections to validated DNS results, and does not follow redirects.
 
 ```bash
 python -m qa_tools.web_api_smoke https://your-authorized-domain.example/health --expect-json
