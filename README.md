@@ -64,3 +64,22 @@ python -m unittest discover -s tests -v
 ```
 
 See [the smoke-check guide](reports/web-api-smoke-guide.md) for usage and safety limits. Test only systems you own or are explicitly authorized to assess.
+
+
+## Declarative API contract suite
+
+For authorized API endpoints, `qa_tools/api_suite.py` runs read-only GET checks for HTTP status, JSON validity, required nested fields, expected values, and optional response-time thresholds. It produces JSON and HTML reports.
+
+Create a JSON spec using the example in [the API suite guide](reports/api-suite-guide.md), then run:
+
+```bash
+python -m qa_tools.api_suite reports/api-spec.json
+```
+
+On Windows:
+
+```powershell
+py -m qa_tools.api_suite reports/api-spec.json
+```
+
+The API suite has unit tests in `tests/test_api_suite.py`; run the complete suite with `py -m unittest discover -s tests -v`. It is not a penetration tester, load tester, or full OpenAPI validator.
