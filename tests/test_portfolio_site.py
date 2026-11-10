@@ -13,6 +13,7 @@ class PortfolioHTMLParser(HTMLParser):
         self.ids = []
         self.links = []
         self.stylesheets = []
+        self.scripts = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -22,6 +23,8 @@ class PortfolioHTMLParser(HTMLParser):
             self.links.append(attrs["href"])
         if tag == "link" and attrs.get("rel") == "stylesheet":
             self.stylesheets.append(attrs.get("href"))
+        if tag == "script" and attrs.get("src"):
+            self.scripts.append(attrs["src"])
 
 
 class PortfolioSiteTests(unittest.TestCase):
@@ -47,6 +50,13 @@ class PortfolioSiteTests(unittest.TestCase):
         self.assertIn("style.css", self.parser.stylesheets)
         for href in self.parser.stylesheets:
             self.assertTrue((SITE.parent / href).is_file(), f"Missing stylesheet: {href}")
+
+    def test_project_intake_form_is_present_and_upload_is_not_claimed_live(self):
+        self.assertIn('id="intake-form"', self.html)
+        self.assertIn('name="uploaded_file"', self.html)
+        self.assertIn('name="permission_confirmed"', self.html)
+        self.assertIn("Secure file upload is not active yet", self.html)
+        self.assertIn("intake.js", self.parser.scripts)
 
     def test_contact_does_not_send_private_details_to_public_issue(self):
         self.assertNotIn("/issues/new", self.html)
